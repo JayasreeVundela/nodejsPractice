@@ -1,0 +1,43 @@
+GET http://localhost:3000/books/
+
+###
+GET http://localhost:3000/books/5/
+
+###
+POST http://localhost:3000/books/
+Content-Type:application/json
+
+{
+ "title"   :"Harry Potter and the Sorcerers Stone 1",
+ "author_id":2,
+ "rating" : 5.52,
+ "rating_count": 32425,
+ "review_count":124235,
+ "description": "ndAHFHWNVJVI",
+ "pages":400,
+ "date_of_publication":"December 3rd 2023",
+ "edition_language":"Telugu",
+ "price":400,
+ "online_stores":"Amazon, Audible, Google play, Indigo"
+}
+
+###
+PUT http://localhost:3000/books/41/
+Content-Type: application/json
+
+{
+"title":"Vampire Dairies",
+ "authorId":8,
+ "rating" : 5.52,
+ "ratingCount": 32425,
+ "reviewCount":124235,
+ "description": "vampire things",
+ "pages":1000,
+ "dateOfPublication":"January 3rd 2023",
+ "editionLanguage":"English",
+ "price":900,
+ "onlineStores":"Amazon, Indigo" 
+}
+
+###
+DELETE http://localhost:3000/books/41/
