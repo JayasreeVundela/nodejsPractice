@@ -1,0 +1,26 @@
+GET http://localhost:3000/todos/?category=WOK
+###
+
+PUT http://localhost:3000/todos/5/
+Content-Type: application/json
+
+{ 
+    "dueDate": "2023-06-28"
+}
+###
+
+POST http://localhost:3000/todos/
+Content-Type: application/json
+
+{
+ "id": 6,
+ "todo": "Finalize event theme",
+ "priority": "LOW",
+ "status": "TO DO",
+ "category": "HOME",
+ "dueDate": "2021-02-1"
+}
+###
+
+GET http://localhost:3000/agenda/?date=2023-06-28
+###
