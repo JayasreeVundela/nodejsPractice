@@ -184,8 +184,8 @@ app.get("/tweets/:tweetId/", authenticateUserMiddleware, async (req, res) => {
     res.status(200);
     res.send(response);
   } else {
-    res.status(400);
-    res.send(`Invalid request`);
+    res.status(401);
+    res.send(`Invalid Request`);
   }
 });
 
@@ -260,8 +260,8 @@ app.get(
       res.status(200);
       res.send({ replies });
     } else {
-      res.status(400);
-      res.send(`Invalid request`);
+      res.status(401);
+      res.send(`Invalid Request`);
     }
   }
 );
@@ -320,13 +320,12 @@ app.delete(
         FROM
             user
         INNER JOIN tweet ON user.user_id = tweet.user_id
-        INNER JOIN reply ON tweet.tweet_id = reply.tweet_id
-        INNER JOIN like ON tweet.tweet_id = like.user_id
-        WHERE user.username = '${username}'
-        GROUP BY tweet.tweet_id;`;
+        WHERE user.username = '${username}';`;
+
     const dbUserTweets = await db.all(getUserTweetsQuery);
-    const userTweets = dbUserTweets.map((tweet) => tweet.tweetId);
-    if (userTweets.includes(parseInt(tweetId)) === true) {
+    const userTweetIds = dbUserTweets.map((tweet) => tweet.tweetId);
+    // console.log(userTweetIds);
+    if (userTweetIds.includes(parseInt(tweetId)) === true) {
       const deleteTweetQuery = `
         DELETE FROM tweet
         WHERE tweet_id = ${tweetId};`;
@@ -334,8 +333,8 @@ app.delete(
       res.status(200);
       res.send(`Tweet Removed`);
     } else {
-      res.status(400);
-      res.send(`Invalid request`);
+      res.status(401);
+      res.send(`Invalid Request`);
     }
   }
 );
